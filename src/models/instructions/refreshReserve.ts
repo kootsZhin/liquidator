@@ -18,7 +18,6 @@ export const refreshReserveInstruction = (
   config: Config,
   reserve: PublicKey,
   oracle?: PublicKey,
-  switchboardFeedAddress?: PublicKey,
 ): TransactionInstruction => {
   const dataLayout = BufferLayout.struct([BufferLayout.u8('instruction')]);
 
@@ -29,14 +28,6 @@ export const refreshReserveInstruction = (
 
   if (oracle) {
     keys.push({ pubkey: oracle, isSigner: false, isWritable: false });
-  }
-
-  if (switchboardFeedAddress) {
-    keys.push({
-      pubkey: switchboardFeedAddress,
-      isSigner: false,
-      isWritable: false,
-    });
   }
 
   keys.push({

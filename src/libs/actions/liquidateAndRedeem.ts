@@ -41,7 +41,6 @@ export const liquidateAndRedeem = async (
       config,
       new PublicKey(reserveAddress),
       new PublicKey(oracleInfo!.priceAddress),
-      new PublicKey(oracleInfo!.switchboardFeedAddress),
     );
     ixs.push(refreshReserveIx);
   });

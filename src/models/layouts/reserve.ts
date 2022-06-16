@@ -26,7 +26,6 @@ export interface ReserveLiquidity {
   // @FIXME: oracle option
   oracleOption: number;
   pythOraclePubkey: PublicKey;
-  switchboardOraclePubkey: PublicKey;
   availableAmount: BN;
   borrowedAmountWads: BN;
   cumulativeBorrowRateWads: BN;
@@ -71,7 +70,6 @@ export const ReserveLayout: typeof BufferLayout.Structure = BufferLayout.struct(
         // TODO: replace u32 option with generic equivalent
         // BufferLayout.u32('oracleOption'),
         Layout.publicKey('pythOracle'),
-        Layout.publicKey('switchboardOracle'),
         Layout.uint64('availableAmount'),
         Layout.uint128('borrowedAmountWads'),
         Layout.uint128('cumulativeBorrowRateWads'),
