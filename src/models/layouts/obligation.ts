@@ -55,6 +55,19 @@ export interface ObligationLiquidity {
   marketValue: BN; // decimals
 }
 
+export const ObligationCollateralLayout: typeof BufferLayout.Structure = BufferLayout.struct([
+  Layout.publicKey('depositReserve'),
+  Layout.uint64('depositedAmount'),
+  Layout.uint128('marketValue'),
+]);
+
+export const ObligationLiquidityLayout: typeof BufferLayout.Structure = BufferLayout.struct([
+  Layout.publicKey('borrowReserve'),
+  Layout.uint128('cumulativeBorrowRateWads'),
+  Layout.uint128('borrowedAmountWads'),
+  Layout.uint128('marketValue'),
+]);
+
 export const ObligationLayout: typeof BufferLayout.Structure = BufferLayout.struct([
   BufferLayout.u8('version'),
 
@@ -66,27 +79,12 @@ export const ObligationLayout: typeof BufferLayout.Structure = BufferLayout.stru
   Layout.uint128('borrowedValue'),
   Layout.uint128('allowedBorrowValue'),
   Layout.uint128('unhealthyBorrowValue'),
-  BufferLayout.blob(64, '_padding'),
 
   BufferLayout.u8('depositsLen'),
   BufferLayout.u8('borrowsLen'),
-  BufferLayout.blob(1096, 'dataFlat'),
+  BufferLayout.blob(ObligationCollateralLayout.span + 9 * ObligationLiquidityLayout.span, 'dataFlat'),
 ]);
 
-export const ObligationCollateralLayout: typeof BufferLayout.Structure = BufferLayout.struct([
-  Layout.publicKey('depositReserve'),
-  Layout.uint64('depositedAmount'),
-  Layout.uint128('marketValue'),
-  BufferLayout.blob(32, 'padding'),
-]);
-
-export const ObligationLiquidityLayout: typeof BufferLayout.Structure = BufferLayout.struct([
-  Layout.publicKey('borrowReserve'),
-  Layout.uint128('cumulativeBorrowRateWads'),
-  Layout.uint128('borrowedAmountWads'),
-  Layout.uint128('marketValue'),
-  BufferLayout.blob(32, 'padding'),
-]);
 
 export const isObligation = (info: AccountInfo<Buffer>) => info.data.length === ObligationLayout.span;
 
