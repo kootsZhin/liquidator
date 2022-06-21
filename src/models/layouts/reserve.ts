@@ -5,7 +5,7 @@ import * as Layout from 'libs/layout';
 import BigNumber from 'bignumber.js';
 import { LastUpdate, LastUpdateLayout } from './lastUpdate';
 
-export const RESERVE_LEN = 619;
+export const RESERVE_LEN = 571;
 export const WAD = new BigNumber(1000000000000000000);
 
 const INITIAL_COLLATERAL_RATIO = 1;

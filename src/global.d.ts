@@ -12,13 +12,11 @@ export interface Asset {
 }
 export interface Oracles {
   pythProgramID: string;
-  switchboardProgramID: string;
   assets: OracleAsset[];
 }
 export interface OracleAsset {
   asset: string;
   priceAddress: string;
-  switchboardFeedAddress: string;
 }
 export interface Market {
   name: string;

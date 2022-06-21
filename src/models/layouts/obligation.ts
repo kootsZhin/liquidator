@@ -4,7 +4,7 @@ import * as BufferLayout from 'buffer-layout';
 import * as Layout from 'libs/layout';
 import { LastUpdate, LastUpdateLayout } from './lastUpdate';
 
-export const OBLIGATION_LEN = 1300;
+export const OBLIGATION_LEN = 916;
 
 export interface Obligation {
   version: number;
@@ -139,7 +139,7 @@ export const ObligationParser = (
   const borrowsBuffer = dataFlat.slice(
     depositsBuffer.length,
     depositsLen * ObligationCollateralLayout.span
-      + borrowsLen * ObligationLiquidityLayout.span,
+    + borrowsLen * ObligationLiquidityLayout.span,
   );
   const borrows = BufferLayout.seq(
     ObligationLiquidityLayout,
